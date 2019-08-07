@@ -18,9 +18,15 @@ export class ContactsPageComponent implements OnInit {
   ngOnInit() {
     this.show = false;
     this.contacts$ = this.http.contacts$;
-    this.contacts$.subscribe(
-      data => (this.contacts = this.http.contacts = data)
-    );
+    this.contacts$.subscribe(data => {
+      this.contacts = this.http.contacts = data;
+
+      if (this.contacts.length === 0) {
+        this.http.dummyData$.subscribe(dummy =>
+          console.log(`CANT FETCH CONTACTS`, dummy)
+        );
+      }
+    });
   }
 
   onFormSubmit(contact: Contact) {

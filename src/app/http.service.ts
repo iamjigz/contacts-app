@@ -17,6 +17,10 @@ export class HttpService {
     return this.http.get(this.base) as Observable<Contact[]>;
   }
 
+  get dummyData$() {
+    return this.http.get('http://dummy.restapiexample.com/api/v1/employees');
+  }
+
   getContact(id: string): Observable<Contact> {
     return this.http.get(`${this.base}/${id}`).pipe(
       timeout(1000),
