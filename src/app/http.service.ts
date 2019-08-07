@@ -8,8 +8,7 @@ import { timeout, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class HttpService {
-  private cors = 'https://cors-anywhere.herokuapp.com';
-  private base = `${this.cors}/https://jsonplaceholder.typicode.com/users`;
+  private base = `https://jsonplaceholder.typicode.com/users`;
   contacts: Contact[];
 
   constructor(private http: HttpClient) {}
