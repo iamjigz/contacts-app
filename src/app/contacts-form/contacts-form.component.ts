@@ -11,7 +11,7 @@ export class ContactsFormComponent implements OnInit {
   @Output() FormSubmitted: EventEmitter<any> = new EventEmitter<any>();
 
   form: FormGroup = new FormGroup({
-    id: new FormControl('', Validators.required),
+    id: new FormControl(''),
     name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', Validators.required)

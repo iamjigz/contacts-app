@@ -22,7 +22,9 @@ export class ContactsDetailComponent implements OnInit {
 
   ngOnInit() {
     this.contact$ = this.getContact();
-    this.contact$.subscribe(data => (this.contact = data));
+    this.contact$.subscribe(data => {
+      this.contact = data;
+    });
   }
 
   getContact() {
