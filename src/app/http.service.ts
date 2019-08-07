@@ -14,13 +14,7 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   get contacts$() {
-    return this.http.get(this.base).pipe(
-      timeout(1000),
-      retry(1),
-      catchError(e => {
-        return of(this.contacts);
-      })
-    ) as Observable<Contact[]>;
+    return this.http.get(this.base) as Observable<Contact[]>;
   }
 
   getContact(id: string): Observable<Contact> {
