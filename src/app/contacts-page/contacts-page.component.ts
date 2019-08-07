@@ -20,14 +20,12 @@ export class ContactsPageComponent implements OnInit {
     this.contacts$ = this.http.contacts$;
     this.contacts$.subscribe(data => {
       this.contacts = this.http.contacts = data;
-
-      // TODO: REMOVE THIS
-      if (this.contacts.length === 0) {
-        this.http.dummyData$.subscribe(dummy =>
-          console.log(`CANT FETCH CONTACTS`, dummy)
-        );
-      }
     });
+
+    // TODO: REMOVE THIS
+    this.http.dummyData$.subscribe(dummy =>
+      console.error(`TEST OTHER API`, dummy)
+    );
   }
 
   onFormSubmit(contact: Contact) {
