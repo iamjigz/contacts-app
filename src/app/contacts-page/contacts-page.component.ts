@@ -21,11 +21,6 @@ export class ContactsPageComponent implements OnInit {
     this.contacts$.subscribe(data => {
       this.contacts = this.http.contacts = data;
     });
-
-    // TODO: REMOVE THIS
-    this.http.dummyData$.subscribe(dummy =>
-      console.error(`TEST OTHER API`, dummy)
-    );
   }
 
   onFormSubmit(contact: Contact) {
