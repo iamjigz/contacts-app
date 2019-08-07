@@ -14,6 +14,23 @@ export class HttpService {
 
   constructor(private http: HttpClient) {}
 
+  public setHttpHeader(): HttpHeaders {
+    return new HttpHeaders()
+      .set('Content-Type', `text/text`)
+      .append(
+        'Access-Control-Allow-Methods',
+        'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+      )
+      .append('Cache-control', 'no-cache')
+      .append('Cache-control', 'no-store')
+      .append('Access-Control-Allow-Origin', '*')
+      .append('X-Requested-With', 'XMLHttpRequest')
+      .append(
+        'Access-Control-Allow-Headers',
+        'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method'
+      );
+  }
+
   get contacts$() {
     return this.http.get(this.base) as Observable<Contact[]>;
   }
