@@ -32,7 +32,7 @@ export class ContactsListComponent implements OnInit {
   get controls() {
     return this.form.controls;
   }
-  
+
   update(contact: Contact) {
     this.isEditing = true;
     contact.editable = !contact.editable;
