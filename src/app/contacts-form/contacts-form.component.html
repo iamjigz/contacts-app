@@ -1,6 +1,42 @@
 <form [(formGroup)]="form" (ngSubmit)="submit()">
   <input id="name" formControlName="name" placeholder="Name" />
+  <div
+    *ngIf="
+      controls['name'].invalid &&
+      (controls['name'].dirty || controls['name'].touched)
+    "
+  >
+    <div *ngIf="controls['name'].errors.required">
+      Name is required.
+    </div>
+  </div>
+
   <input id="email" formControlName="email" placeholder="Email" />
-  <input id="phone" formControlName="phone" placeholder="Contact" />
-  <button type="submit">Submit</button>
+  <div
+    *ngIf="
+      controls['email'].invalid &&
+      (controls['email'].dirty || controls['email'].touched)
+    "
+  >
+    <div *ngIf="controls['email'].errors.required">
+      Email is required.
+    </div>
+    <div *ngIf="controls['email'].errors.email">
+      Must be a valid email.
+    </div>
+  </div>
+
+  <input id="phone" formControlName="phone" placeholder="Phone" />
+  <div
+    *ngIf="
+      controls['phone'].invalid &&
+      (controls['phone'].dirty || controls['phone'].touched)
+    "
+  >
+    <div *ngIf="controls['phone'].errors.required">
+      Contact is required.
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!form.valid">Submit</button>
 </form>

@@ -28,6 +28,10 @@ export class ContactsFormComponent implements OnInit {
     return max.id;
   }
 
+  get controls() {
+    return this.form.controls;
+  }
+
   submit() {
     this.form.controls.id.setValue(this._getMaxId() + 1);
     this.FormSubmitted.emit(this.form.value);

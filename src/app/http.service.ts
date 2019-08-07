@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Contact } from './contact';
+import { retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,38 +14,33 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   get contacts$() {
-    return this.http.get(this.base) as Observable<Contact[]>;
+    return this.http.get(this.base).pipe(retry(3)) as Observable<Contact[]>;
   }
 
   getContact(id: string): Observable<Contact> {
-    return this.http.get(`${this.base}/${id}`) as Observable<Contact>;
+    return this.http.get(`${this.base}/${id}`).pipe(retry(3)) as Observable<
+      Contact
+    >;
   }
 
   add(contact: Contact) {
     this.contacts.push(contact);
     return this.http
       .post(this.base, contact)
-      .subscribe(
-        data => console.log('New contact added', data),
-        err => console.log('Error adding new contact', contact, err)
-      );
+      .subscribe(data => console.log('New contact added', data));
   }
 
   update(contact: Contact) {
     return this.http
       .patch(`${this.base}/${contact.id}`, contact)
-      .subscribe(
-        data => console.log(`ID ${contact.id} has been updated`, contact),
-        err => console.log('Error updating contact', contact, err)
+      .subscribe(data =>
+        console.log(`ID ${contact.id} has been updated`, contact)
       );
   }
 
   delete(id: string) {
     return this.http
       .delete(`${this.base}/${id}`)
-      .subscribe(
-        data => console.log(`ID ${id} has been deleted`, id),
-        err => console.log('Error deleting contact', id, err)
-      );
+      .subscribe(data => console.log(`ID ${id} has been deleted`, id));
   }
 }

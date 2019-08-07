@@ -1,10 +1,17 @@
-<div *ngIf="contact$ | async as contact">
-  <span>ID: {{ contact.id }}</span>
-  <span>Name: {{ contact.name }}</span>
-  <span>Email: {{ contact.email }}</span>
-  <span>Contact: {{ contact.phone }}</span>
+<main>
+  <h3>Detail</h3>
+  <div *ngIf="contact$ | async as contact; else loading">
+    <span>ID: {{ contact.id }}</span>
+    <span>Name: {{ contact.name }}</span>
+    <span>Email: {{ contact.email }}</span>
+    <span>Contact: {{ contact.phone }}</span>
 
-  <p>
-    <button (click)="goHome()">Back</button>
-  </p>
-</div>
+    <p>
+      <button type="button" (click)="goHome()">Back</button>
+    </p>
+  </div>
+</main>
+
+<ng-template #loading>
+  Loading...
+</ng-template>

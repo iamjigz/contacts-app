@@ -29,6 +29,10 @@ export class ContactsListComponent implements OnInit {
     this.helper = this.contacts;
   }
 
+  get controls() {
+    return this.form.controls;
+  }
+  
   update(contact: Contact) {
     this.isEditing = true;
     contact.editable = !contact.editable;

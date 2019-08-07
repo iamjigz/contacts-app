@@ -1,13 +1,22 @@
-<main *ngIf="contacts$ | async">
-  <button (click)="show = !show">Add User</button>
+<main>
+  <h3>Contacts</h3>
+  <div *ngIf="contacts$ | async; else loading">
+    <app-contacts-form
+      *ngIf="show"
+      (FormSubmitted)="onFormSubmit($event)"
+    ></app-contacts-form>
 
-  <app-contacts-form
-    *ngIf="show"
-    (FormSubmitted)="onFormSubmit($event)"
-  ></app-contacts-form>
-  <app-contacts-list
-    [contacts]="contacts"
-    (DeleteContact)="onDeleteContact($event)"
-    (UpdateContact)="onUpdateContact($event)"
-  ></app-contacts-list>
+    <button *ngIf="!show" (click)="show = !show">Add User</button>
+    <button *ngIf="show" (click)="show = !show">Cancel</button>
+
+    <app-contacts-list
+      [contacts]="contacts"
+      (DeleteContact)="onDeleteContact($event)"
+      (UpdateContact)="onUpdateContact($event)"
+    ></app-contacts-list>
+  </div>
 </main>
+
+<ng-template #loading>
+  Loading...
+</ng-template>

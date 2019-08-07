@@ -31,18 +31,18 @@
         <td>
           <span *ngIf="!contact.editable">{{ contact.email }}</span>
           <input
-            type="text"
-            class="form-control"
-            [(value)]="contact.email"
+            id="email"
+            formControlName="email"
+            placeholder="Email"
             *ngIf="contact.editable"
           />
         </td>
         <td>
           <span *ngIf="!contact.editable">{{ contact.phone }}</span>
           <input
-            type="text"
-            class="form-control"
-            [(value)]="contact.phone"
+            id="phone"
+            formControlName="phone"
+            placeholder="Phone"
             *ngIf="contact.editable"
           />
         </td>
@@ -51,11 +51,21 @@
           View
         </button>
         <button *ngIf="!isEditing" (click)="update(contact)">Update</button>
-        <button *ngIf="isEditing" (click)="save(contact)">Save</button>
+        <button
+          *ngIf="isEditing && contact.editable"
+          (click)="save(contact)"
+          [disabled]="!form.valid"
+        >
+          Save
+        </button>
         <button *ngIf="isEditing" (click)="cancel(contact)">
           Cancel
         </button>
         <button *ngIf="!isEditing" (click)="delete(contact.id)">Delete</button>
+
+        <span *ngIf="isEditing && form.invalid && contact.editable">
+          Check your data
+        </span>
       </tr>
     </tbody>
   </table>
