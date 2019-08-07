@@ -1,0 +1,6 @@
+<form [(formGroup)]="form" (ngSubmit)="submit()">
+  <input id="name" formControlName="name" placeholder="Name" />
+  <input id="email" formControlName="email" placeholder="Email" />
+  <input id="phone" formControlName="phone" placeholder="Contact" />
+  <button type="submit">Submit</button>
+</form>

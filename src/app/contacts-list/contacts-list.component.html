@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Contact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let contact of contacts">
+      <td>{{ contact.id }}</td>
+      <td>{{ contact.name }}</td>
+      <td>{{ contact.email }}</td>
+      <td>{{ contact.phone }}</td>
+      <button [routerLink]="['/user', contact.id]">View</button>
+      <button [routerLink]="['/edit', contact.id]">Update</button>
+      <button (click)="delete(contact.id)">Delete</button>
+    </tr>
+  </tbody>
+</table>

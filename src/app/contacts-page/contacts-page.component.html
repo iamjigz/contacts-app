@@ -1,0 +1,16 @@
+<main *ngIf="contacts; else loading">
+  <button (click)="show = !show">Add User</button>
+
+  <app-contacts-form
+    *ngIf="show"
+    (FormSubmitted)="onFormSubmit($event)"
+  ></app-contacts-form>
+  <app-contacts-list
+    [contacts]="contacts"
+    (DeleteContact)="onDeleteContact($event)"
+  ></app-contacts-list>
+</main>
+
+<ng-template #loading>
+  Loading...
+</ng-template>
