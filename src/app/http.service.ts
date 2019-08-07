@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Contact } from './contact';
 import { timeout, catchError } from 'rxjs/operators';
@@ -13,8 +13,26 @@ export class HttpService {
 
   constructor(private http: HttpClient) {}
 
+  public setHttpHeader(): HttpHeaders {
+    return new HttpHeaders()
+      .set('Content-Type', `text/json`)
+      .append(
+        'Access-Control-Allow-Methods',
+        'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+      )
+      .append('Cache-control', 'no-cache')
+      .append('Cache-control', 'no-store')
+      .append('Access-Control-Allow-Origin', '*')
+      .append(
+        'Access-Control-Allow-Headers',
+        'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method'
+      );
+  }
+
   get contacts$() {
-    return this.http.get(this.base) as Observable<Contact[]>;
+    return this.http.get(this.base, {
+      headers: this.setHttpHeader()
+    }) as Observable<Contact[]>;
   }
 
   getContact(id: string): Observable<Contact> {
