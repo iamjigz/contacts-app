@@ -1,4 +1,4 @@
-<main *ngIf="contacts; else loading">
+<main *ngIf="contacts$ | async; else loading">
   <button (click)="show = !show">Add User</button>
 
   <app-contacts-form
@@ -8,6 +8,7 @@
   <app-contacts-list
     [contacts]="contacts"
     (DeleteContact)="onDeleteContact($event)"
+    (UpdateContact)="onUpdateContact($event)"
   ></app-contacts-list>
 </main>
 

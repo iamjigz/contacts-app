@@ -8,14 +8,3 @@
     <button (click)="goHome()">Back</button>
   </p>
 </div>
-
-<div *ngIf="backup$ && !contact$ | async as contact">
-  <span>ID: {{ contact.id }}</span>
-  <span>Name: {{ contact.name }}</span>
-  <span>Email: {{ contact.email }}</span>
-  <span>Contact: {{ contact.phone }}</span>
-
-  <p>
-    <button (click)="goHome()">Back</button>
-  </p>
-</div>

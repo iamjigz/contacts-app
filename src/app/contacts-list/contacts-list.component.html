@@ -1,21 +1,62 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Contact</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let contact of contacts">
-      <td>{{ contact.id }}</td>
-      <td>{{ contact.name }}</td>
-      <td>{{ contact.email }}</td>
-      <td>{{ contact.phone }}</td>
-      <button [routerLink]="['/user', contact.id]">View</button>
-      <button [routerLink]="['/edit', contact.id]">Update</button>
-      <button (click)="delete(contact.id)">Delete</button>
-    </tr>
-  </tbody>
-</table>
+<form [(formGroup)]="form">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of helper; let i = index">
+        <td>
+          <span *ngIf="!contact.editable">{{ contact.id }}</span>
+          <input
+            id="id"
+            formControlName="id"
+            placeholder="ID"
+            *ngIf="contact.editable"
+          />
+        </td>
+        <td>
+          <span *ngIf="!contact.editable">{{ contact.name }}</span>
+          <input
+            id="name"
+            formControlName="name"
+            placeholder="Name"
+            *ngIf="contact.editable"
+          />
+        </td>
+        <td>
+          <span *ngIf="!contact.editable">{{ contact.email }}</span>
+          <input
+            type="text"
+            class="form-control"
+            [(value)]="contact.email"
+            *ngIf="contact.editable"
+          />
+        </td>
+        <td>
+          <span *ngIf="!contact.editable">{{ contact.phone }}</span>
+          <input
+            type="text"
+            class="form-control"
+            [(value)]="contact.phone"
+            *ngIf="contact.editable"
+          />
+        </td>
+
+        <button *ngIf="!isEditing" [routerLink]="['/user', contact.id]">
+          View
+        </button>
+        <button *ngIf="!isEditing" (click)="update(contact)">Update</button>
+        <button *ngIf="isEditing" (click)="save(contact)">Save</button>
+        <button *ngIf="isEditing" (click)="cancel(contact)">
+          Cancel
+        </button>
+        <button *ngIf="!isEditing" (click)="delete(contact.id)">Delete</button>
+      </tr>
+    </tbody>
+  </table>
+</form>

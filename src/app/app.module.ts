@@ -11,7 +11,6 @@ import { ContactsListComponent } from './contacts-list/contacts-list.component';
 import { ContactsFormComponent } from './contacts-form/contacts-form.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ContactsDetailComponent } from './contacts-detail/contacts-detail.component';
-import { ContactsEditComponent } from './contacts-edit/contacts-edit.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +19,7 @@ import { ContactsEditComponent } from './contacts-edit/contacts-edit.component';
     ContactsListComponent,
     ContactsFormComponent,
     PageNotFoundComponent,
-    ContactsDetailComponent,
-    ContactsEditComponent
+    ContactsDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,7 @@ import { Contact } from '../contact';
 })
 export class ContactsDetailComponent implements OnInit {
   contact$: Observable<Contact>;
-  backup$: Observable<Contact>;
+  contact: Contact;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,20 +22,14 @@ export class ContactsDetailComponent implements OnInit {
 
   ngOnInit() {
     this.contact$ = this.getContact();
-    this.backup$ = this.getFromBackup();
+    this.contact$.subscribe(data => (this.contact = data));
   }
 
   getContact() {
     return this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => this.http.getContact$(params.get('id')))
-    );
-  }
-
-  getFromBackup() {
-    return this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.http.contacts.filter(contact => contact.id !== params.get('id'))
-      )
+      switchMap((params: ParamMap) => {
+        return this.http.getContact(params.get('id'));
+      })
     );
   }
 

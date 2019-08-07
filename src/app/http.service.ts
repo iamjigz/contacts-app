@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Contact } from './contact';
 
 @Injectable({
@@ -12,11 +12,11 @@ export class HttpService {
 
   constructor(private http: HttpClient) {}
 
-  get contacts$(): Observable<Contact[]> {
+  get contacts$() {
     return this.http.get(this.base) as Observable<Contact[]>;
   }
 
-  getContact$(id: string): Observable<Contact> {
+  getContact(id: string): Observable<Contact> {
     return this.http.get(`${this.base}/${id}`) as Observable<Contact>;
   }
 
@@ -31,9 +31,6 @@ export class HttpService {
   }
 
   update(contact: Contact) {
-    const index = this.contacts.findIndex(i => i.id === contact.id);
-    this.contacts[index] = contact;
-
     return this.http
       .patch(`${this.base}/${contact.id}`, contact)
       .subscribe(
