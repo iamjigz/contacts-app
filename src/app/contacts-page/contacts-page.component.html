@@ -1,4 +1,4 @@
-<main *ngIf="contacts$ | async; else loading">
+<main *ngIf="contacts$ | async">
   <button (click)="show = !show">Add User</button>
 
   <app-contacts-form
@@ -11,7 +11,3 @@
     (UpdateContact)="onUpdateContact($event)"
   ></app-contacts-list>
 </main>
-
-<ng-template #loading>
-  Loading...
-</ng-template>
