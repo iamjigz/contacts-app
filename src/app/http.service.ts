@@ -17,6 +17,7 @@ export class HttpService {
     return this.http.get(this.base) as Observable<Contact[]>;
   }
 
+  // TODO: REMOVE THIS
   get dummyData$() {
     return this.http.get('http://dummy.restapiexample.com/api/v1/employees');
   }
