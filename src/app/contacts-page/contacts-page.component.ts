@@ -24,7 +24,7 @@ export class ContactsPageComponent implements OnInit {
   }
 
   onFormSubmit(contact: Contact) {
-    this.contacts.push(contact);
+    this.http.add(contact);
   }
 
   onDeleteContact(id: string) {

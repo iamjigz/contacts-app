@@ -53,7 +53,7 @@ export class HttpService {
 
   update(contact: Contact) {
     return this.http
-      .patch(`${this.base}/${contact.id}`, contact)
+      .put(`${this.base}/${contact.id}`, contact)
       .subscribe(data =>
         console.log(`ID ${contact.id} has been updated`, contact)
       );
