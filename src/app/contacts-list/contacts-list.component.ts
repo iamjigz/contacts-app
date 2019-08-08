@@ -62,6 +62,8 @@ export class ContactsListComponent implements OnInit {
   }
 
   delete(id: string) {
+    this.helper = this.helper.filter(i => i.id !== id);
+
     this.DeleteContact.emit(id);
   }
 }
