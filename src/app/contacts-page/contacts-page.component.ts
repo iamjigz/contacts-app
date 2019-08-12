@@ -12,15 +12,22 @@ export class ContactsPageComponent implements OnInit {
   contacts$: Observable<Contact[]>;
   contacts: Contact[];
   show: boolean;
+  buttonText: string;
 
   constructor(private http: HttpService) {}
 
   ngOnInit() {
     this.show = false;
+    this.buttonText = 'Add User';
     this.contacts$ = this.http.contacts$;
     this.contacts$.subscribe(data => {
       this.contacts = this.http.contacts = data;
     });
+  }
+
+  showButton() {
+    this.show = !this.show;
+    this.buttonText = this.show ? 'Cancel' : 'Add User';
   }
 
   onFormSubmit(contact: Contact) {

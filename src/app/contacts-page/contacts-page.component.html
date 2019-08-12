@@ -6,8 +6,7 @@
       (FormSubmitted)="onFormSubmit($event)"
     ></app-contacts-form>
 
-    <button *ngIf="!show" (click)="show = !show">Add User</button>
-    <button *ngIf="show" (click)="show = !show">Cancel</button>
+    <button (click)="showButton()">{{ buttonText }}</button>
 
     <app-contacts-list
       [contacts]="contacts"
